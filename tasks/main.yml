@@ -1,5 +1,6 @@
 ---
-- become: true
+- name: Install WireGuard
+  become: true
   tags: wireguard
   block:
     - name: Install
