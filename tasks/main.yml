@@ -1,0 +1,43 @@
+---
+- become: true
+  tags: wireguard
+  block:
+    - name: Install
+      apt:
+        name:
+          - wireguard
+          - openresolv
+        update_cache: true
+
+    - name: Generate keys
+      shell: |
+        set -o pipefail
+        umask 077
+        wg genkey | tee private.key | wg pubkey > public.key
+      args:
+        chdir: /etc/wireguard
+        creates: /etc/wireguard/private.key
+        executable: /bin/bash
+      register: wireguard_keys
+
+    - name: Read public key
+      command: cat /etc/wireguard/private.key
+      register: wireguard_public_key
+      changed_when: false
+
+    - name: Print to console
+      debug:
+        var: wireguard_public_key.stdout
+
+    - name: Configure
+      template:
+        dest: /etc/wireguard/wg0.conf
+        src: wg0.conf.j2
+        mode: '0600'
+      notify: Restart Wireguard
+
+    - name: Configure service
+      service:
+        name: wg-quick@wg0
+        state: "{{ wireguard_service_state }}"
+        enabled: "{{ wireguard_service_enabled }}"

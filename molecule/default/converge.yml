@@ -1,0 +1,21 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include joenyland.wireguard"
+      include_role:
+        name: "joenyland.wireguard"
+  vars:
+    wireguard_interface:
+      address: 192.168.100.100/24
+      post_up:
+        - wg set %i private-key /etc/wireguard/private.key
+      dns:
+        - 1.1.1.1
+        - vpn
+    wireguard_peers:
+      - name: Test
+        public_key: VD432KouBz5Ed/NMNi7IC2uvpInGKyKtk4WMH/lqAAM=
+        allowed_ips: 192.168.100.1/32
+        endpoint: example.com:51820
+        keep_alive: 25

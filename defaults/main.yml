@@ -1,0 +1,3 @@
+---
+wireguard_service_enabled: true
+wireguard_service_state: started
