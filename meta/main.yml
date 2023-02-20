@@ -9,8 +9,6 @@ galaxy_info:
   - name: Debian
     versions:
       - bullseye # 11 (stable)
-      - buster # 10 (oldstable)
-      - stretch # 9 LTS (oldoldstable)
   galaxy_tags:
     - wireguard
     - vpn

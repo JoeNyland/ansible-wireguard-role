@@ -23,8 +23,6 @@ jobs:
       matrix:
         image:
           - geerlingguy/docker-debian11-ansible # bullseye (stable)
-          - geerlingguy/docker-debian10-ansible # buster (oldstable)
-          - geerlingguy/docker-debian9-ansible # stretch LTS (oldoldstable)
     steps:
       - name: Checkout
         uses: actions/checkout@v3
