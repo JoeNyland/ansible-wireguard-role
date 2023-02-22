@@ -62,14 +62,6 @@ Example Playbook
 ----------------
 
 ```yaml
-# requirements.yml
-roles:
-  - name: joenyland.wireguard
-    src: https://github.com/JoeNyland/ansible-wireguard-role
-```
-
-```yaml
-# Playbook
 - hosts: server
   roles:
     - joenyland.wireguard
