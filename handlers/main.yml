@@ -1,5 +1,6 @@
 ---
 - name: Restart Wireguard
   service:
-    name: wg-quick@wg0
+    name: 'wg-quick@{{ item }}'
     state: restarted
+  loop: "{{ wireguard_interfaces_configured.results | selectattr('changed', 'equalto', true) | map(attribute='interface') | map(attribute='key') | list }}"

@@ -30,15 +30,24 @@
       debug:
         var: wireguard_public_key.stdout
 
-    - name: Configure
+    - name: Configure interfaces
       template:
-        dest: /etc/wireguard/wg0.conf
-        src: wg0.conf.j2
+        dest: /etc/wireguard/{{ interface.key }}.conf
+        src: interface.conf.j2
         mode: '0600'
+      loop: "{{ wireguard_interfaces | dict2items }}"
+      loop_control:
+        loop_var: interface
+        label: interface_{{ interface.key }}
+      register: wireguard_interfaces_configured
       notify: Restart Wireguard
 
-    - name: Configure service
+    - name: Configure services
       service:
-        name: wg-quick@wg0
+        name: wg-quick@{{ interface.key }}
         state: "{{ wireguard_service_state }}"
         enabled: "{{ wireguard_service_enabled }}"
+      loop: "{{ wireguard_interfaces | dict2items }}"
+      loop_control:
+        loop_var: interface
+        label: interface_{{ interface.key }}

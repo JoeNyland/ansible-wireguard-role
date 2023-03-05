@@ -6,16 +6,27 @@
       include_role:
         name: "joenyland.wireguard"
   vars:
-    wireguard_interface:
-      address: 192.168.100.100/24
-      post_up:
-        - wg set %i private-key /etc/wireguard/private.key
-      dns:
-        - 1.1.1.1
-        - vpn
-    wireguard_peers:
-      - name: Test
-        public_key: VD432KouBz5Ed/NMNi7IC2uvpInGKyKtk4WMH/lqAAM=
-        allowed_ips: 192.168.100.1/32
-        endpoint: example.com:51820
-        keep_alive: 25
+    wireguard_interfaces:
+      wg0:
+        address: 192.168.100.100/24
+        post_up:
+          - wg set %i private-key /etc/wireguard/private.key
+        dns:
+          - 1.1.1.1
+          - vpn
+        peers:
+          - name: Test
+            public_key: VD432KouBz5Ed/NMNi7IC2uvpInGKyKtk4WMH/lqAAM=
+            allowed_ips: 192.168.100.1/32
+            endpoint: example.com:51820
+            keep_alive: 25
+      wg1:
+        address: 192.168.200.100/24
+        post_up:
+          - wg set %i private-key /etc/wireguard/private.key
+        peers:
+          - name: Test
+            public_key: TVZ6z0QGW/s+HAyCIuEEgAlUDQrwOBQ0uBY+2B7ZymE=
+            allowed_ips: 192.168.200.1/32
+            endpoint: example.com:51821
+            keep_alive: 25

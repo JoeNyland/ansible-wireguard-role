@@ -1,0 +1,33 @@
+[Interface]
+Address = {{ interface.value.address }}
+{% if interface.value.dns is defined %}
+DNS = {{ interface.value.dns | join(', ') }}
+{% endif %}
+{% if interface.value.listen_port is defined %}
+ListenPort = {{ interface.value.listen_port }}
+{% endif %}
+{% if interface.value.post_up is defined %}
+{% for command in interface.value.post_up %}
+PostUp = {{ command }}
+{% endfor %}
+{% endif %}
+{% if interface.value.post_down is defined %}
+{% for command in interface.value.post_down %}
+PostDown = {{ command }}
+{% endfor %}
+{% endif %}
+{% for peer in interface.value.peers %}
+
+{% if 'name' in peer %}
+# {{ peer.name }}
+{% endif %}
+[Peer]
+PublicKey = {{ peer.public_key }}
+AllowedIPs = {{ peer.allowed_ips }}
+{% if peer.endpoint is defined %}
+Endpoint = {{ peer.endpoint }}
+{% endif %}
+{% if peer.keep_alive is defined %}
+PersistentKeepalive = {{ peer.keep_alive }}
+{% endif %}
+{% endfor %}
