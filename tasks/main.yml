@@ -45,8 +45,8 @@
     - name: Configure services
       service:
         name: wg-quick@{{ interface.key }}
-        state: "{{ wireguard_service_state }}"
-        enabled: "{{ wireguard_service_enabled }}"
+        state: "{{ interface.value.state | default('started') }}"
+        enabled: "{{ interface.value.enabled | default(true) }}"
       loop: "{{ wireguard_interfaces | dict2items }}"
       loop_control:
         loop_var: interface
