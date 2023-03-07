@@ -36,7 +36,7 @@ wireguard_interfaces:
         endpoint:  # Optional
         keep_alive: # Optional
     enabled: true # Should this interface start at boot?
-    state: # What state should the interface be in? e.g. started/stopped
+    state: started # What state should the interface be in?
 ```
 
 Dependencies
