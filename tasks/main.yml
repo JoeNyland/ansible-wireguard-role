@@ -22,7 +22,7 @@
       register: wireguard_keys
 
     - name: Read public key
-      command: cat /etc/wireguard/private.key
+      command: cat /etc/wireguard/public.key
       register: wireguard_public_key
       changed_when: false
 
