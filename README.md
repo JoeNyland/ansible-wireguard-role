@@ -23,6 +23,7 @@ Defines the WireGuard interfaces to configure.
 wireguard_interfaces:
   wg0:
     address:
+    mtu:
     post_up:
       - wg set %i private-key /etc/wireguard/private.key # Recommended. This key is generated on install of the role.
     dns: # Optional

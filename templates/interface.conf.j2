@@ -16,6 +16,9 @@ PostUp = {{ command }}
 PostDown = {{ command }}
 {% endfor %}
 {% endif %}
+{% if interface.value.mtu is defined %}
+MTU = {{ interface.value.mtu }}
+{% endif %}
 {% for peer in interface.value.peers %}
 
 {% if 'name' in peer %}
