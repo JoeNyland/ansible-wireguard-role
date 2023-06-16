@@ -8,7 +8,8 @@ galaxy_info:
   platforms:
   - name: Debian
     versions:
-      - bullseye # 11 (stable)
+      - bookworm # 12 (stable)
+      - bullseye # 11 (oldstable)
   galaxy_tags:
     - wireguard
     - vpn
