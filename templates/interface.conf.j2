@@ -26,7 +26,7 @@ MTU = {{ interface.value.mtu }}
 {% endif %}
 [Peer]
 PublicKey = {{ peer.public_key }}
-AllowedIPs = {{ peer.allowed_ips }}
+AllowedIPs = {{ [peer.allowed_ips] | flatten | join(', ') }}
 {% if peer.endpoint is defined %}
 Endpoint = {{ peer.endpoint }}
 {% endif %}
