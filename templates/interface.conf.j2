@@ -1,5 +1,5 @@
 [Interface]
-Address = {{ interface.value.address }}
+Address = {{ [interface.value.address] | flatten | join(', ') }}
 {% if interface.value.dns is defined %}
 DNS = {{ interface.value.dns | join(', ') }}
 {% endif %}
